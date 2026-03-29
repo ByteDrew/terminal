@@ -1,0 +1,123 @@
+       @layer base {
+            html {
+                font-family: 'Inter', system-ui, sans-serif;
+                @apply text-gray-900 dark:text-gray-100;
+            }
+
+            /* Aperture Science Loading Spinner */
+            .aperture-loader {
+                @apply relative w-12 h-12 mx-auto;
+            }
+
+            .aperture-loader:before {
+                content: '';
+                @apply absolute inset-0 border-4 border-transparent border-t-blue-500 dark:border-t-blue-400 border-r-orange-500 dark:border-r-orange-400 rounded-full;
+                animation: aperture-spin 1s linear infinite;
+            }
+
+            .aperture-loader:after {
+                content: '';
+                @apply absolute inset-2 bg-white dark:bg-gray-900 rounded-full;
+            }
+
+            @keyframes aperture-spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        }
+
+        @layer components {
+            /* Portal-themed selections */
+            ::selection {
+                @apply bg-blue-500/30 dark:bg-blue-500/50;
+            }
+
+            /* Portal-styled scrollbar */
+            ::-webkit-scrollbar {
+                @apply w-2 h-2;
+            }
+
+            ::-webkit-scrollbar-track {
+                @apply bg-gray-100 dark:bg-gray-800;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                @apply bg-gradient-to-b from-blue-500 to-orange-500 rounded-full;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                @apply bg-gradient-to-b from-blue-600 to-orange-600;
+            }
+        }
+
+        .portal-gradient-text {
+            @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-orange-500;
+        }
+
+        .portal-gradient-bg {
+            @apply bg-gradient-to-r from-blue-500/10 to-orange-500/10 dark:from-blue-500/20 dark:to-orange-500/20;
+        }
+
+        .portal-border {
+            @apply border border-blue-200 dark:border-blue-800;
+            background-image: linear-gradient(to right, #fff, #fff), linear-gradient(to right, #007FFF, #FF6700);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+        }
+
+        .dark .portal-border {
+            background-image: linear-gradient(to right, #0f172a, #0f172a), linear-gradient(to right, #007FFF, #FF6700);
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .feature-card {
+            @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md portal-border transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10;
+        }
+
+        .feature-icon {
+            @apply w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-orange-400 text-white flex items-center justify-center mb-4;
+        }
+
+        .feature-content h3 {
+            @apply text-xl font-semibold mb-2 portal-gradient-text;
+        }
+
+        .feature-content p {
+            @apply text-gray-600 dark:text-gray-400;
+        }
+
+        .team-card {
+            @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md portal-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg;
+        }
+
+        .team-photo {
+            @apply w-24 h-24 rounded-full mx-auto mb-4 object-cover border-2 border-blue-400 dark:border-blue-700;
+        }
+
+        .step {
+            @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md portal-border relative transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg flex flex-col items-center text-center;
+        }
+
+        .step-number {
+            @apply w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-orange-500 text-white font-bold flex items-center justify-center mb-4;
+        }
+
+        .stat-item {
+            @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md portal-border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-blue-500/20 text-center;
+        }
+
+        .stat-number {
+            @apply text-3xl font-bold mb-2 portal-gradient-text;
+        }
+
+        .stat-label {
+            @apply text-gray-600 dark:text-gray-400;
+        }

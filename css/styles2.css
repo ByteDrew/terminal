@@ -1,0 +1,49 @@
+    /* Smooth scrolling pour toute la page */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Optimisation des animations */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    /* Amélioration du backdrop blur */
+    @supports (backdrop-filter: blur(12px)) {
+        .backdrop-blur-xl {
+            backdrop-filter: blur(12px);
+        }
+    }
+
+    /* Fix pour Safari */
+    @supports (-webkit-backdrop-filter: blur(12px)) {
+        .backdrop-blur-xl {
+            -webkit-backdrop-filter: blur(12px);
+        }
+    }
+
+    /* Préparation pour le dark mode */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            color-scheme: dark;
+        }
+    }
+
+    /* Amélioration de l'accessibilité focus */
+    .focus\:ring-2:focus {
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    }
+
+    /* Optimisation des transitions */
+    .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }

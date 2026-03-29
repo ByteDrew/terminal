@@ -1,0 +1,369 @@
+	/* ===== NOUVEAU SCROLL INDICATOR UX ===== */
+
+	/* Réduire le z-index pour éviter les conflits */
+	#scroll-indicator {
+		z-index: 40 !important;
+		animation: slideInIndicator 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+		pointer-events: none;
+		/* Éviter les interactions accidentelles */
+	}
+
+	/* Permettre les interactions uniquement sur les points de navigation */
+	.nav-point {
+		pointer-events: auto;
+	}
+
+	/* S'assurer que le contenu principal a un z-index inférieur */
+	section {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Animation d'entrée du conteneur principal */
+	@keyframes slideInIndicator {
+		from {
+			opacity: 0;
+			transform: translateY(100px);
+		}
+
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (min-width: 768px) {
+		#scroll-indicator {
+			animation: slideInIndicatorDesktop 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
+		}
+
+		@keyframes slideInIndicatorDesktop {
+			from {
+				opacity: 0;
+				transform: translateY(-50%) translateX(100px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(-50%) translateX(0);
+			}
+		}
+	}
+
+	/* Points de navigation */
+	.nav-point {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-decoration: none;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		cursor: pointer;
+	}
+
+	.point-container {
+		position: relative;
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	/* Arrière-plan du point */
+	.point-bg {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+		border: 2px solid #475569;
+		border-radius: 50%;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		backdrop-filter: blur(8px);
+	}
+
+	/* Effet de lueur */
+	.point-glow {
+		position: absolute;
+		inset: -4px;
+		background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+		border-radius: 50%;
+		opacity: 0;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		filter: blur(8px);
+	}
+
+	/* Icône */
+	.point-icon {
+		position: relative;
+		z-index: 3;
+		color: #94a3b8;
+		font-size: 1.2rem;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Tooltip */
+	.point-tooltip {
+		position: absolute;
+		background: rgba(15, 23, 42, 0.95);
+		backdrop-filter: blur(12px);
+		color: white;
+		padding: 8px 16px;
+		border-radius: 12px;
+		font-size: 0.875rem;
+		font-weight: 500;
+		white-space: nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transform: scale(0.8);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+		z-index: 30;
+		pointer-events: none;
+	}
+
+	.tooltip-text {
+		position: relative;
+		z-index: 2;
+	}
+
+	.tooltip-arrow {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 8px solid transparent;
+	}
+
+	/* Position des tooltips - Desktop */
+	@media (min-width: 768px) {
+		.point-tooltip {
+			right: calc(100% + 20px);
+			top: 50%;
+			transform: translateY(-50%) scale(0.8);
+		}
+
+		.tooltip-arrow {
+			left: 100%;
+			top: 50%;
+			transform: translateY(-50%);
+			border-left-color: rgba(15, 23, 42, 0.95);
+		}
+	}
+
+	/* Position des tooltips - Mobile */
+	@media (max-width: 767px) {
+		.point-tooltip {
+			bottom: calc(100% + 20px);
+			left: 50%;
+			transform: translateX(-50%) scale(0.8);
+		}
+
+		.tooltip-arrow {
+			top: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			border-top-color: rgba(15, 23, 42, 0.95);
+		}
+	}
+
+	/* États hover et focus */
+	.nav-point:hover .point-bg,
+	.nav-point:focus .point-bg {
+		background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #f59e0b 100%);
+		border-color: transparent;
+		transform: scale(1.1);
+		box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+	}
+
+	.nav-point:hover .point-glow,
+	.nav-point:focus .point-glow {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+
+	.nav-point:hover .point-icon,
+	.nav-point:focus .point-icon {
+		color: white;
+		transform: scale(1.1);
+		text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+	}
+
+	.nav-point:hover .point-tooltip,
+	.nav-point:focus .point-tooltip {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(-50%) scale(1);
+	}
+
+	@media (max-width: 767px) {
+
+		.nav-point:hover .point-tooltip,
+		.nav-point:focus .point-tooltip {
+			transform: translateX(-50%) scale(1);
+		}
+	}
+
+	/* État actif */
+	.nav-point.active .point-bg {
+		background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #f59e0b 100%);
+		border: 2px solid transparent;
+		box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2), 0 8px 32px rgba(59, 130, 246, 0.4);
+		animation: activePulse 2s infinite;
+	}
+
+	.nav-point.active .point-glow {
+		opacity: 0.8;
+		animation: glowPulse 2s infinite;
+	}
+
+	.nav-point.active .point-icon {
+		color: white;
+		text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+		transform: scale(1.15);
+	}
+
+	/* Animations */
+	@keyframes activePulse {
+
+		0%,
+		100% {
+			box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2), 0 8px 32px rgba(59, 130, 246, 0.4);
+		}
+
+		50% {
+			box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.1), 0 12px 40px rgba(59, 130, 246, 0.6);
+		}
+	}
+
+	@keyframes glowPulse {
+
+		0%,
+		100% {
+			opacity: 0.6;
+			transform: scale(1.1);
+		}
+
+		50% {
+			opacity: 1;
+			transform: scale(1.3);
+		}
+	}
+
+	/* Animation d'apparition séquentielle des points */
+	.nav-point {
+		animation: fadeInPoint 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+	}
+
+	.nav-point:nth-child(2) {
+		animation-delay: 0.1s;
+	}
+
+	.nav-point:nth-child(3) {
+		animation-delay: 0.2s;
+	}
+
+	.nav-point:nth-child(4) {
+		animation-delay: 0.3s;
+	}
+
+	.nav-point:nth-child(5) {
+		animation-delay: 0.4s;
+	}
+
+	.nav-point:nth-child(6) {
+		animation-delay: 0.5s;
+	}
+
+	@keyframes fadeInPoint {
+		from {
+			opacity: 0;
+			transform: scale(0.5) translateY(20px);
+		}
+
+		to {
+			opacity: 1;
+			transform: scale(1) translateY(0);
+		}
+	}
+
+	/* Amélioration de l'accessibilité */
+	.nav-point:focus {
+		outline: 2px solid rgba(59, 130, 246, 0.6);
+		outline-offset: 4px;
+		border-radius: 50%;
+	}
+
+	/* Responsive - ajustements mobile */
+	@media (max-width: 768px) {
+		.point-container {
+			width: 44px;
+			height: 44px;
+		}
+
+		.point-icon {
+			font-size: 1.1rem;
+		}
+
+		.point-tooltip {
+			font-size: 0.8rem;
+			padding: 6px 12px;
+		}
+	}
+
+	/* Effet de clic avec feedback visuel */
+	.nav-point:active {
+		transform: scale(0.95);
+	}
+
+	.nav-point:active .point-bg {
+		transform: scale(0.95);
+	}
+
+	/* Amélioration de la barre de progression */
+	#progress-line {
+		position: relative;
+		overflow: hidden;
+	}
+
+	#progress-line::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+		animation: shimmer 2s infinite;
+	}
+
+	@keyframes shimmer {
+		0% {
+			left: -100%;
+		}
+
+		100% {
+			left: 100%;
+		}
+	}
+
+	/* Version mobile spécifique */
+	@media (max-width: 768px) {
+		#scroll-indicator>div {
+			background: rgba(15, 23, 42, 0.9);
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+		}
+
+		#progress-line::after {
+			animation: shimmerHorizontal 2s infinite;
+		}
+
+		@keyframes shimmerHorizontal {
+			0% {
+				left: -100%;
+			}
+
+			100% {
+				left: 100%;
+			}
+		}
+	}

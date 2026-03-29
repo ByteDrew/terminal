@@ -1,0 +1,103 @@
+	.feature-card {
+		@apply backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 relative h-full transform transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-blue-500/20;
+	}
+
+	.feature-icon {
+		@apply w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/30 group-hover:shadow-blue-600/50 transition-all duration-300;
+	}
+
+	.hide-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Portal-inspired light beam effect */
+	.light-beam {
+		position: absolute;
+		width: 4px;
+		height: 100%;
+		background: linear-gradient(to bottom, transparent, #3b82f6, #fb923c, transparent);
+		left: 35%;
+		transform: translateX(-50%);
+		opacity: 0.3;
+		filter: blur(4px);
+		animation: scan 10s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	@keyframes scan {
+
+		0%,
+		100% {
+			left: 25%;
+			opacity: 0.2;
+		}
+
+		50% {
+			left: 75%;
+			opacity: 0.4;
+		}
+	}
+	
+		/* Animations spécifiques pour la section partenaires */
+	@keyframes float {
+
+		0%,
+		100% {
+			transform: translateY(0px);
+		}
+
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	@keyframes pulse-glow {
+
+		0%,
+		100% {
+			box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+		}
+
+		50% {
+			box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+		}
+	}
+
+	.partner-card {
+		animation: float 6s ease-in-out infinite;
+	}
+
+	.partner-card:nth-child(2) {
+		animation-delay: -2s;
+	}
+
+	.partner-card:nth-child(3) {
+		animation-delay: -4s;
+	}
+
+	/* Amélioration des hover effects */
+	.group:hover .partner-logo {
+		filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
+	}
+
+	/* Loading animation pour les futurs partenaires */
+	.future-partner {
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.02), transparent);
+		background-size: 200% 100%;
+		animation: shimmer 2s infinite;
+	}
+
+	@keyframes shimmer {
+		0% {
+			background-position: -200% 0;
+		}
+
+		100% {
+			background-position: 200% 0;
+		}
+	}
